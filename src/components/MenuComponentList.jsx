@@ -1,7 +1,6 @@
 // src/components/MenuComponentList.jsx
-// Este componente es el elemento "/"
-// Muestra todos los componentes del menu con botones para  
-// listar productos de un componente, crear productos, borrar el componente
+// Lista los componentes del menu  
+// Botones: listar los productos y crear productos nuevos de un componente específico
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -26,76 +25,59 @@ export const MenuComponentList = () => {
     fetchMenuComponents();
   }, []);
 
-  const listProducts = (id) => {
-    navigate(`/list-products/${id}`);
-  };
-
-  const createProducts = (id) => {
-    navigate(`/create-products/${id}`);
-  };
-
-  const deleteComponent = async (id) => {
-    const confirmDelete = window.confirm(
-      "⚠️ ¿Estás seguro de que quieres eliminar este componente y todos sus productos e items asociados?"
-    );
-    if (!confirmDelete) return;
-
-    try {
-      await axios.delete(`http://localhost:8000/menu/${id}`);
-      fetchMenuComponents(); // recargar lista después de eliminar
-    } catch (err) {
-      console.error("Error eliminando componente:", err);
-      alert("❌ Error al eliminar el componente");
-    }
-  };
-
   return (
     <div className="p-2">
-      <h1 className="text-2xl text-center font-bold mb-2 text-gray-800">MENU</h1>
-      <p className="text-center not-even:mb-6 text-gray-600">Here you can view and manage the menu components</p>
+      <h1 className="text-center text-2xl font-bold mb-2 text-gray-800">MENU COMPONENTS</h1>
+      <p className="text-center not-even:mb-6 text-gray-600">Here you can list and add the products of one specific component</p>
 
       <div className="overflow-x-auto bg-white rounded-lg shadow">
         <table className="min-w-full table-auto text-left">
           <thead className="bg-gray-100 text-gray-700">
             <tr>
-              <th className="px-2 py-1 border">Menu Components</th>
-              <th className="px-2 py-1 border">Actions</th>
+              <th className="text-center px-2 py-1 border">Menu Components</th>
+              <th className="text-center px-2 py-1 border">Actions</th>
             </tr>
           </thead>
 
           <tbody>
             {components.map((comp) => (
               <tr key={comp._id} className="hover:bg-gray-50">
-                <td className="px-2 py-1 border">{comp.name}</td>
+                <td className="px-2 py-1 text-xl border">{comp.name}</td>
                 <td className="px-2 py-1 border space-x-2">
                   <button
-                    onClick={() => listProducts(comp._id)}
-                    className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    onClick={() => navigate(`/products-list/${comp._id}/${comp.name}`)}
+                    // className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    className="px-2 py-1 bg-green-700 text-white rounded hover:bg-green-900"
                   >
                     List Products
                   </button>
 
                   <button
-                    onClick={() => createProducts(comp._id)}
-                    className="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+                    onClick={() => navigate(`/product-create/${comp._id}/${comp.name}`)}
+                    className="px-3 py-1 bg-cyan-500 text-white rounded hover:bg-cyan-700"
                   >
-                    Create Products
-                  </button>
-
-                  <button
-                    onClick={() => deleteComponent(comp._id)}
-                    className="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
-                  >
-                    Delete Component
+                    Add Products
                   </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-      </div>
 
-      {error && <p className="mt-4 text-red-500">{error}</p>}
+        {error && <p className="mt-4 text-red-500">{error}</p>}
+
+        <div className="px-3 py-3 flex justify-between items-center">
+          <button
+            type="button"
+            className="bg-blue-500 text-blue-600 hover:underline font-semibold"
+            onClick={() => navigate('/component-base')}
+          >
+            ← Back
+          </button>
+        </div>
+
+      </div>
+      
     </div>
   );
 };

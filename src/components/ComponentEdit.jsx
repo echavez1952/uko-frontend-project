@@ -1,46 +1,58 @@
-// src/components/MenuComponentForm.jsx
-// Crea un componente base del menu
+// src/components/ComponentEdit.jsx
+// Editar un componente
 
 import { useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from 'axios';
 
-export const MenuComponentForm = () => {
-  
+export const ComponentEdit = () => {
   const navigate = useNavigate();
-  const [name, setName] = useState('');
+  const { compId, compName } = useParams();
+
+  const [name, setName] = useState(compName || '');
   const [description, setDescription] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+
+  console.log(name);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8000/menu', {
+      const response = await axios.put(`http://localhost:8000/menu/${compId}`, {
         name
+        // description
       });
 
-      if (response.status === 200 || response.status === 201) {
-        setSuccessMessage('✅ Component created successfully.');
+      if (response.status === 200) {
+        setSuccessMessage('✅ Component updated successfully.');
         setErrorMessage('');
-        setErrorMessage('');
-        setName('');
       } else {
-        setErrorMessage('❌ Component creation error.');
+        setErrorMessage('❌ Component update error.');
         setSuccessMessage('');
       }
     } catch (err) {
-      setErrorMessage('❌ Component creation error.');
+      setErrorMessage('❌ Component update error.');
       setSuccessMessage('');
-      console.error('Error:', err);
+      console.error('Update error:', err);
     }
   };
 
   return (
     <div className="max-w-md mx-auto p-4 bg-white shadow rounded">
-      <h2 className="text-xl font-semibold mb-4">
-        Menu Component Creation</h2>
+      <h2 className="text-xl text-center font-semibold mb-4">
+        {/* Edit Component: <span className="text-blue-600">{compName}</span> */}
+        Edit Component
+      </h2>
+
+      {/* Preview dinámico */}
+      <div className="mb-4 p-3 bg-gray-100 rounded text-center">
+        <p className="text-sm text-gray-600">Preview:</p>
+        <h3 className="text-lg font-bold text-blue-700">{name || 'Component name will appear here'}</h3>
+      </div>
+
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
@@ -55,13 +67,13 @@ export const MenuComponentForm = () => {
           type="submit"
           className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
         >
-          Create
+          Update
         </button>
       </form>
-      
+
       {successMessage && <p className="text-green-600 mt-2">{successMessage}</p>}
       {errorMessage && <p className="text-red-600 mt-2">{errorMessage}</p>}
-    
+
       {/* Botones de back y next */}
       <div className="px-3 py-3 flex justify-between items-center">
         <button
@@ -80,7 +92,6 @@ export const MenuComponentForm = () => {
           Next →
         </button>
       </div>
-  
     </div>
   );
 };

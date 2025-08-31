@@ -48,7 +48,7 @@ export const MenuSection = () => {
       const res = await axios.get(
         `http://localhost:8000/item/product/${product._id}`
       );
-      const sorted = res.data.sort((a, b) => {
+      const sorted = res.data.sort((a,b) => {
         if (a.image && !b.image) return -1;
         if (!a.image && b.image) return 1;
         return 0;
@@ -67,8 +67,8 @@ export const MenuSection = () => {
           <span
             key={comp._id}
             onClick={() => handleSelectComponent(comp)}
-            className={`cursor-pointer font-semibold text-lg hover:text-green-700 transition ${selectedComponent?._id === comp._id
-                ? "text-green-700 underline"
+            className={`cursor-pointer font-semibold text-lg hover:text-purple-700 transition ${selectedComponent?._id === comp._id
+                ? "text-purple-700 underline"
                 : "text-gray-800"
               }`}
           >
@@ -80,7 +80,7 @@ export const MenuSection = () => {
       {/* TÍTULO DEL COMPONENTE */}
       {selectedComponent && (
         <div className="mb-8">
-          <div className="bg-green-900 text-white text-center py-3 rounded-lg mb-4">
+          <div className="bg-purple-900 text-white text-center py-3 rounded-lg mb-4">
             <h2 className="text-3xl font-bold">{selectedComponent.name}</h2>
           </div>
 
@@ -91,8 +91,8 @@ export const MenuSection = () => {
                 key={prod._id}
                 onClick={() => handleSelectProduct(prod)}
                 className={`cursor-pointer font-medium text-lg whitespace-nowrap transition ${selectedProduct?._id === prod._id
-                    ? "text-green-700 underline"
-                    : "text-gray-700 hover:text-green-600"
+                    ? "text-purple-700 underline"
+                    : "text-gray-700 hover:text-purple-600"
                   }`}
               >
                 {prod.title}
@@ -123,7 +123,9 @@ export const MenuSection = () => {
               <div className="flex-1">
                 <h4
                   onClick={() => item.image && setModalImage(item.image)}
-                  className={`font-semibold text-lg cursor-pointer ${item.image ? "text-green-700 hover:underline" : "text-gray-800"
+                  className={`font-semibold text-lg cursor-pointer ${item.image
+                      ? "text-purple-700 hover:underline"
+                      : "text-gray-800"
                     }`}
                 >
                   {item.title}
@@ -135,7 +137,7 @@ export const MenuSection = () => {
 
               {/* Precio */}
               {item.price && (
-                <p className="text-green-900 font-semibold whitespace-nowrap">
+                <p className="text-purple-900 font-semibold whitespace-nowrap">
                   ${item.price}
                 </p>
               )}

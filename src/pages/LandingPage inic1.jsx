@@ -18,15 +18,11 @@ export const LandingPage = () => {
 
       {/* Contenido anclado abajo */}
       <div className="relative z-10 w-full px-6 pb-20 md:pb-28">
-       {/* Caja */}
-        <div className="mx-auto max-w-2xl rounded-xl bg-green-900/85 p-8 text-center shadow-xl">
-          {/* ↑ drop-shadow al texto para perfilar letras sobre la foto */}
-          <h1 className="mb-4 text-4xl font-extrabold leading-tight md:text-5xl drop-shadow-[0_2px_2px_rgba(0,0,0,0.85)] subpixel-antialiased">
+        <div className="mx-auto max-w-2xl rounded-xl bg-green-900/70 backdrop-blur-sm p-8 text-center">
+          <h1 className="mb-4 text-4xl font-bold md:text-5xl">
             Bienvenido a <span className="text-white">UKÖ Bread</span>
           </h1>
-          {/* <p className="text-lg font-medium md:text-xl drop-shadow-[0_1.5px_1.5px_rgba(0,0,0,0.75)] subpixel-antialiased"> */}
-          {/* <p className="text-lg font-medium md:text-xl text-shadow-white">   */}
-          <p className="text-lg font-medium md:text-xl ">  
+          <p className="text-lg font-medium md:text-xl">
             La magia de la fermentación natural
           </p>
         </div>
@@ -34,3 +30,4 @@ export const LandingPage = () => {
     </section>
   );
 };
+

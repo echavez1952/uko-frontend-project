@@ -9,8 +9,7 @@ import axios from "axios";
 export const ItemCreateForm = () => {
   const { productId, prodTitle } = useParams();
   const decodedTitle = decodeURIComponent(prodTitle);
-  const navigate = useNavigate(); 
-  
+
   const [formData, setFormData] = useState({
     title: "",
     price: "",
@@ -96,9 +95,7 @@ export const ItemCreateForm = () => {
   return (
     <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
 
-      <h1 className="text-center text-xl font-bold mb-4">
-        Add new Item for: {" "}
-        <span style={{ color: 'blue' }}>{decodedTitle}</span>
+      <h1 className="text-center text-xl font-bold mb-4">Create Item for: <span style={{ color: 'blue' }}>{decodedTitle}</span>
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -166,10 +163,9 @@ export const ItemCreateForm = () => {
           />
         </div>
 
-        <div className="flex gap-2 space-x-4">
+        <div className="flex gap-4 space-x-4">
           <button
             type="button"
-            // className="flex-1 bg-gray-400 text-white py-2 rounded hover:bg-gray-500"
             className="flex-1 bg-gray-400 text-white py-2 rounded hover:bg-gray-500"
             onClick={() => navigate(-1)}
           >
@@ -177,10 +173,9 @@ export const ItemCreateForm = () => {
           </button>
           <button
             type="submit"
-            // className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
-            className="flex-1 bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
+            className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
           >
-            Add Item
+            Create Item
           </button>
         </div>
       </form >

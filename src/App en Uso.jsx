@@ -41,6 +41,7 @@ export const App = () => {
           <Route path="/list-products/:componentId" element={<ProductsList />} />
           <Route path="/edit-product/:itemId" element={<ProductEdit />} />
           <Route path="/component-with-products" element={<MenuWithProducts />} />
+          
 
         </Routes>
       </Layout>
