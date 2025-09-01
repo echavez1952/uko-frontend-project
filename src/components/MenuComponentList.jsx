@@ -42,7 +42,7 @@ export const MenuComponentList = () => {
           <tbody>
             {components.map((comp) => (
               <tr key={comp._id} className="hover:bg-gray-50">
-                <td className="px-2 py-1 text-xl border">{comp.name}</td>
+                <td className="px-2 py-1 text-xl font-semibold border">{comp.name}</td>
                 <td className="px-2 py-1 border space-x-2">
                   <button
                     onClick={() => navigate(`/products-list/${comp._id}/${comp.name}`)}

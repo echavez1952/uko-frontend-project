@@ -66,7 +66,7 @@ export const ProductCreateForm = () => {
         <div className="flex space-x-4">
           <button
             type="button"
-            className="flex-1 bg-gray-400 text-white py-2 rounded hover:bg-gray-500"
+            className="flex-1 bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
             onClick={() => navigate('/component-list')}
           >
             ← Back

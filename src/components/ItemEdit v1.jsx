@@ -8,8 +8,7 @@ import { useDropzone } from "react-dropzone";
 
 export const ItemEdit = () => {
   const { itemId } = useParams();
-  const [file, setFile] = useState(null);           // archivo seleccionado
-  const [previewUrl, setPreviewUrl] = useState(null); // URL de preview (con cleanup)
+  const [file, setFile] = useState(null); // <- null en lugar de []
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -43,30 +42,17 @@ export const ItemEdit = () => {
     fetchItem();
   }, [itemId]);
 
-  // Generar y limpiar el ObjectURL cuando cambie `file`
-  useEffect(() => {
-    if (!file) {
-      // si no hay archivo, aseguramos limpiar preview
-      if (previewUrl) URL.revokeObjectURL(previewUrl);
-      setPreviewUrl(null);
-      return;
-    }
-
-    const url = URL.createObjectURL(file);
-    setPreviewUrl(url);
-
-    // cleanup al cambiar de archivo o desmontar el componente
-    return () => URL.revokeObjectURL(url);
-  }, [file]); // eslint-disable-line react-hooks/exhaustive-deps
-
   // Dropzone para nueva imagen
-  const onDrop = useCallback((acceptedFiles) => {
-    if (acceptedFiles.length > 0) {
-      const f = acceptedFiles[0];
-      setFile(f);
-      setFormData((prev) => ({ ...prev, image_url: "" }));
-    }
-  }, []);
+  const onDrop = useCallback(
+    (acceptedFiles) => {
+      if (acceptedFiles.length > 0) {
+        const f = acceptedFiles[0];
+        setFile(f);
+        setFormData((prev) => ({ ...prev, image_url: "" }));
+      }
+    },
+    [setFile]
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -106,10 +92,13 @@ export const ItemEdit = () => {
     }
   };
 
+  const previewUrl = file ? URL.createObjectURL(file) : null;
+
   return (
     <div className="p-6 max-w-xl mx-auto">
       <h1 className="text-xl font-bold mb-4 text-gray-800">
-        Edit Item: <span className="text-blue-600">{formData.title || "Loading..."}</span>
+        Edit Item:{" "}
+        <span className="text-blue-600">{formData.title || "Loading..."}</span>
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -138,14 +127,21 @@ export const ItemEdit = () => {
         />
 
         {/* Dropzone para imagen */}
-        <div {...getRootProps()} className="border-2 border-dashed p-4 rounded text-center cursor-pointer">
+        <div
+          {...getRootProps()}
+          className="border-2 border-dashed p-4 rounded text-center cursor-pointer"
+        >
           <input {...getInputProps()} />
           {isDragActive ? (
             <p>Drop an image here...</p>
           ) : previewUrl ? (
             <img src={previewUrl} alt="Preview" className="max-h-40 mx-auto" />
           ) : formData.image_url ? (
-            <img src={formData.image_url} alt="Item" className="max-h-40 mx-auto" />
+            <img
+              src={formData.image_url}
+              alt="Item"
+              className="max-h-40 mx-auto"
+            />
           ) : (
             <p>Drag & drop an image here, or click to select</p>
           )}
@@ -172,4 +168,3 @@ export const ItemEdit = () => {
     </div>
   );
 };
-

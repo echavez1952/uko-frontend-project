@@ -58,7 +58,7 @@ export const ProductsList = () => {
           <tbody>
             {products.map((prod) => (
               <tr key={prod._id} className="hover:bg-gray-50">
-                <td className="px-2 py-1 border">{prod.title}</td>
+                <td className="px-2 py-1 text-xl font-bold border">{prod.title}</td>
                 <td className="px-2 py-1 border space-x-2">
                   <button
                     onClick={() => listItems(prod._id, prod.title)}
