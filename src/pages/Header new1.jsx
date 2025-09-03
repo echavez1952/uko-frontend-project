@@ -1,14 +1,16 @@
 // src/pages/Header.jsx
 
-// Header fijo arriba
+// Header NO fijo (scroll conjunto)
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo_uko.png";
 
 export const Header = () => {
   const navigate = useNavigate();
   return (
-    <header className="fixed top-0 inset-x-0 z-50 h-24 w-full bg-white shadow-md">
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 h-full">
+    // Capa full-bleed que ocupa el viewport completo; evita encogerse
+    <div className="w-screen bg-white shadow-md relative z-50">
+      {/* Header con altura explícita y sin encogimiento */}
+      <header className="max-w-7xl mx-auto h-24 px-6 flex items-center justify-between shrink-0">
         {/* Logo + Título */}
         <div className="flex items-center gap-4">
           <img src={logo} alt="UKÖ Bread" className="h-16" />
@@ -32,16 +34,13 @@ export const Header = () => {
           </span>
         </nav>
 
-
-        {/* Login */}
         <button
           onClick={() => navigate("/login")}
-          className="bg-black text-white px-6 py-3 rounded-full hover:bg-gray-800 font-semibold"
+          className="bg-green-700 text-white px-6 py-3 rounded-full hover:bg-green-800 font-semibold"
         >
           UKÖ Login
         </button>
-      </div>
-    </header>
+      </header>
+    </div>
   );
 };
-

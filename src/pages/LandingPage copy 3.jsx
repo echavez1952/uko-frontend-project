@@ -27,7 +27,7 @@ export const LandingPage = () => {
           <p className="text-lg md:text-xl font-medium">
             La magia de la fermentación natural
           </p>
-          {/* <div>
+          <div>
             <button
               onClick={() => navigate("/menu")}
               className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/95 text-green-900 font-semibold px-6 py-3 hover:bg-white"
@@ -35,7 +35,7 @@ export const LandingPage = () => {
               Entrar a la aplicación
               <span aria-hidden>→</span>
             </button>
-          </div> */}
+          </div>
         </div>
       </div>
     </section>

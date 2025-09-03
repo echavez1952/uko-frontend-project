@@ -21,7 +21,7 @@ export const Login = () => {
             alert(response.data.message);
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("user_logged", JSON.stringify(response.data.user));
-            window.location.href = "/";
+            window.location.href = "/component-base";
             }
         } catch (error) {
             console.error("Login failed", error.response?.data || error.message);

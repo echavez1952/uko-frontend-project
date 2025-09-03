@@ -35,7 +35,6 @@ export const ItemsList = () => {
 
   useEffect(() => {
     fetchItems();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const editItem = (itemId) => navigate(`/edit-item/${itemId}`);
@@ -58,7 +57,7 @@ export const ItemsList = () => {
   };
 
   return (
-    <div className="p-4 max-h-screen overflow-y-auto sticky top-0">
+    <div className="p-4">
       <h1 className="text-center text-xl font-bold mb-4">
         Items of <span className="text-blue-600">{decodedTitle}</span>
       </h1>
@@ -173,10 +172,11 @@ export const ItemsList = () => {
       {/* MODAL de imagen ampliada (click fuera para cerrar) */}
       {modalImage && (
         <div
-          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
+          // className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
           onClick={() => setModalImage(null)}
-          role="dialog"
-          aria-modal="true"
+          // role="dialog"
+          // aria-modal="true"
         >
           <img
             src={modalImage}

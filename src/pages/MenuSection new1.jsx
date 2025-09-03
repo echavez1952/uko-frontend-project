@@ -12,7 +12,7 @@ export const MenuSection = () => {
   const [items, setItems] = useState([]);
   const [modalImage, setModalImage] = useState(null);
 
-// solo la última petición de items puede setear estado
+  // para evitar “carreras”: solo la última petición de items puede setear estado
   const itemsReqId = useRef(0);
 
   // Cargar componentes
@@ -96,8 +96,8 @@ export const MenuSection = () => {
             type="button"
             onClick={() => handleSelectComponent(comp)}
             className={`font-semibold text-lg transition ${selectedComponent?._id === comp._id
-              ? "text-green-700 underline"
-              : "text-gray-800 hover:text-green-700"
+                ? "text-green-700 underline"
+                : "text-gray-800 hover:text-green-700"
               }`}
           >
             <span className="whitespace-normal break-words">{comp.name}</span>
@@ -122,8 +122,8 @@ export const MenuSection = () => {
                 type="button"
                 onClick={() => handleSelectProduct(prod)}
                 className={`text-left font-medium text-lg transition ${selectedProduct?._id === prod._id
-                  ? "text-green-700 underline"
-                  : "text-gray-700 hover:text-green-600"
+                    ? "text-green-700 underline"
+                    : "text-gray-700 hover:text-green-600"
                   }`}
               >
                 <span className="whitespace-normal break-words">{prod.title}</span>
