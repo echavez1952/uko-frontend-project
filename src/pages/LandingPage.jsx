@@ -1,6 +1,6 @@
 // src/pages/LandingPage.jsx
 import { useNavigate } from "react-router-dom";
-import background from "../assets/image-background2.jpg";
+import background from "../assets/image-background.jpg";
 
 export const LandingPage = () => {
   const navigate = useNavigate();
@@ -21,21 +21,12 @@ export const LandingPage = () => {
       {/* Contenido anclado abajo */}
       <div className="relative z-10 w-full px-6 pb-20 md:pb-28">
         <div className="mx-auto max-w-2xl rounded-xl bg-green-900/85 p-8 text-center shadow-xl space-y-4">
-          <h1 className="text-4xl md:text-5xl font-extrabold leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.85)] subpixel-antialiased">
+          <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-white">
             Bienvenido a <span className="text-white">UKÖ Bread</span>
           </h1>
           <p className="text-lg md:text-xl font-medium">
             La magia de la fermentación natural
           </p>
-          {/* <div>
-            <button
-              onClick={() => navigate("/menu")}
-              className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/95 text-green-900 font-semibold px-6 py-3 hover:bg-white"
-            >
-              Entrar a la aplicación
-              <span aria-hidden>→</span>
-            </button>
-          </div> */}
         </div>
       </div>
     </section>

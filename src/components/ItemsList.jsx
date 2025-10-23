@@ -50,16 +50,16 @@ export const ItemsList = () => {
     }
   };
 
-  // Drag & Drop handler (se mantiene como lo tenías)
+  // Drag & Drop handler 
   const onDragStart = (e, item) => {
     e.dataTransfer.setData("text/plain", item._id);
-    e.dataTransfer.setData("image", item.image);
+    if (item.image) e.dataTransfer.setData("image", item.image);
   };
 
   return (
     <div className="p-4">
       <h1 className="text-center text-xl font-bold mb-4">
-        Items of <span className="text-blue-600">{decodedTitle}</span>
+        Items of <span className="text-2xl text-blue-600">{decodedTitle}</span>
       </h1>
 
       {error && <p className="text-red-500">{error}</p>}
@@ -80,7 +80,7 @@ export const ItemsList = () => {
               <col className="w-24" />           {/* Price */}
               <col className="w-[230px]" />      {/* Actions (suficiente para 2 botones) */}
             </colgroup>
-            <thead className="bg-gray-100">
+            <thead className="bg-gray-200">
               <tr>
                 <th className="px-4 py-2 border">Image</th>
                 <th className="px-4 py-2 border align-middle">Item Title</th>
@@ -129,7 +129,7 @@ export const ItemsList = () => {
                     </td>
 
                     {/* Actions en fila, sin wrap */}
-                    <td className="px-4 py-2 border align-middle">
+                    <td className="px-4 py9-2 border align-middle">
                       <div className="flex flex-nowrap items-center justify-center gap-2 whitespace-nowrap min-w-[220px]">
                         <button
                           onClick={() => editItem(item._id)}
@@ -172,11 +172,8 @@ export const ItemsList = () => {
       {/* MODAL de imagen ampliada (click fuera para cerrar) */}
       {modalImage && (
         <div
-          // className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
-          className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+          className="fixed inset-0 mt-16 bg-black/75 flex items-center justify-center z-50"
           onClick={() => setModalImage(null)}
-          // role="dialog"
-          // aria-modal="true"
         >
           <img
             src={modalImage}
